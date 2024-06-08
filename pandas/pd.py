@@ -1,5 +1,3 @@
-# pip install numpy pandas scikit-learn
-
 import pandas as pd
 
 df = pd.read_csv('test.csv')

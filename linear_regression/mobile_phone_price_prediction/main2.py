@@ -104,8 +104,12 @@ print(df.info())
 print(df.head())
 print(df.isnull().sum())
 
-from sklearn.linear_model import LinearRegression
+
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import HistGradientBoostingRegressor
+import matplotlib.pyplot as plt
+
 # 特征和标签
 X = df.drop(columns=['Price'])
 y = df['Price']
@@ -113,33 +117,49 @@ y = df['Price']
 # 分割数据集
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-print(f'X_train shape: {X_train.shape}')
-print(f'y_train shape: {y_train.shape}')
-print(f'X_test shape: {X_test.shape}')
-print(f'y_test shape: {y_test.shape}')
 
-# 创建和训练模型
 model = LinearRegression()
 model.fit(X_train, y_train)
+print(model.score(X_test, y_test))
 
-# 预测
-y_pred = model.predict(X_test)
+hbr = HistGradientBoostingRegressor()
+hbr.fit(X_train, y_train)
+print(hbr.score(X_test, y_test))
 
-# 输出结果
-print("模型系数（权重）:", model.coef_)
-print("模型偏置:", model.intercept_)
-#print("预测值:", y_pred)
-#print("真实值:", y_test.values)
 
 from sklearn.ensemble import ExtraTreesRegressor
+import seaborn as sns
+
 extr = ExtraTreesRegressor().fit(X_train, y_train)
 print(extr.score(X_test, y_test))
+y_pred = extr.predict(X_test)
+check = pd.DataFrame({'y_test': y_test, 'y_pred' : y_pred})
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10, 6))
-plt.scatter(y_test, y_pred, color='blue', edgecolors='k')
-plt.plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=2)
-plt.xlabel('Actual')
-plt.ylabel('Predicted')
-plt.title('Actual vs Predicted Values')
+# Scatterplot
+sns.scatterplot(check, ax=axes[0])
+axes[0].set_title('Scatterplot')
+
+# Histplot
+sns.histplot(check, kde=True, ax=axes[1])
+axes[1].set_title('Histplot')
+
+# Boxplot
+sns.boxplot(check, ax=axes[2])
+axes[2].set_title('Boxplot')
+
+plt.tight_layout()
 plt.show()
+
+import pandas as pd
+from lazypredict.Supervised import LazyRegressor
+from sklearn.preprocessing import MinMaxScaler
+
+
+scaler = MinMaxScaler()
+data = pd.DataFrame(scaler.fit_transform(df[df.columns]), columns=df.columns)
+print(data)
+reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
+models, predictions = reg.fit(X_train, X_test, y_train, y_test)
+
+print(models)
