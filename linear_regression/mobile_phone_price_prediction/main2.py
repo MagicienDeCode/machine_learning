@@ -126,6 +126,14 @@ hbr = HistGradientBoostingRegressor()
 hbr.fit(X_train, y_train)
 print(hbr.score(X_test, y_test))
 
+from xgboost import plot_importance, XGBRegressor
+model = XGBRegressor()
+model.fit(X_train, y_train)
+print(model.score(X_test, y_test))
+fig, ax = plt.subplots(figsize = (20, 20))
+plot_importance(model, ax = ax, grid = False, max_num_features = 100)
+plt.subplots_adjust(left = 0.3)
+plt.show()
 
 from sklearn.ensemble import ExtraTreesRegressor
 import seaborn as sns
