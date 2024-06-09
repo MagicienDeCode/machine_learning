@@ -2,7 +2,7 @@
 
 # Install
 ```
-pip install numpy pandas scikit-learn matplotlib lazypredict -U
+pip install numpy pandas scikit-learn matplotlib lazypredict seaborn -U
 ```
 
 ## 线性模型
