@@ -21,4 +21,3 @@ patterns = ['Helio P35', 'Helio G88']
 df = df[~df['Processor_name'].str.contains('|'.join(patterns))]
 
 print(df)
-
