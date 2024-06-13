@@ -67,7 +67,6 @@ df['Ram'] = df['Ram'].str.split(' ', expand=True)[0].astype(float)
 df['Battery'] = df['Battery'].str.split(' ', expand=True)[0].astype(int)
 df['Display'] = df['Display'].str.split(' ', expand=True)[0].astype(float)
 
-
 # Fast Charging
 
 df['fast_charging'] = df['fast_charging'].str.extract(r'(\d+)').astype(float)
@@ -239,6 +238,7 @@ from lazypredict.Supervised import LazyRegressor
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 
+df.to_csv("test.csv")
 
 
 scaler = MinMaxScaler()
@@ -250,8 +250,50 @@ y = data['Price']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 
-print(data)
-reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
-models, predictions = reg.fit(X_train, X_test, y_train, y_test)
+lazyReg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
+models, predictions = lazyReg.fit(X_train, X_test, y_train, y_test)
 
 print(models)
+
+
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+# 进行预测
+"""
+X = df.drop(columns=['Price'])
+y = df['Price']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+"""
+gbr_model = GradientBoostingRegressor()
+
+gbr_model.fit(X_train, y_train)
+"""
+y_pred = gbr_model.predict(X_test)
+# 计算 R-Squared 值
+r2 = r2_score(y_test, y_pred)
+
+print("R平方:", r2)
+"""
+
+import matplotlib.pyplot as plt
+
+coefficients = gbr_model.feature_importances_
+
+# 创建一个DataFrame来存储特征名称和对应的系数
+feature_importance = pd.DataFrame({'Feature': X.columns, 'Coefficient': coefficients})
+
+# 按绝对值大小排序
+feature_importance['Abs_Coefficient'] = feature_importance['Coefficient'].abs()
+feature_importance = feature_importance.sort_values(by='Abs_Coefficient', ascending=False)
+
+
+# 绘制特征重要性图
+plt.figure(figsize=(10, 6))
+plt.barh(feature_importance['Feature'], feature_importance['Coefficient'])
+plt.xlabel('Coefficient Value')
+plt.ylabel('Feature')
+plt.title('Feature Importance in Linear Regression')
+plt.gca().invert_yaxis()
+plt.show()
