@@ -5,6 +5,16 @@
 pip install numpy pandas scikit-learn matplotlib lazypredict seaborn -U
 ```
 
+```bash
+# mac os create python env
+
+$ mkdir -p $HOME/.venvs  # create a folder for all virtual environments 
+$ python3 -m venv $HOME/.venvs/p3env  # create p3env
+
+alias activep3="source /Users/xiangli/.venvs/p3env/bin/activate"
+
+```
+
 ## 线性模型
 - 线性回归 (Linear Regression): 用于回归问题，试图找到输入特征和输出变量之间的线性关系。
 - 逻辑回归 (Logistic Regression): 用于分类问题，输出的是一个概率值，表示某个样本属于某个类别的概率。
