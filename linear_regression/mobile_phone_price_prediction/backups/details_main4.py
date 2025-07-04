@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('mobile_phone_price_prediction.csv')
+df = pd.read_csv('../mobile_phone_price_prediction.csv')
 
 df.drop(['Name','Unnamed: 0'],axis=1,inplace=True)
 df['company'] = df['company'].str.lower()

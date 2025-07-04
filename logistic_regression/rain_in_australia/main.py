@@ -66,6 +66,7 @@ dtypes: float64(16), object(7)
 
 # In this section, I segregate the dataset into categorical and numerical variables. There are a mixture of categorical and numerical variables in the dataset. Categorical variables have data type object. Numerical variables have data type float64.
 categorical = [var for var in df.columns if df[var].dtype=='O']
+# In pandas, columns with dtype 'O' usually contain strings or mixed types, so this line is used to identify all categorical (non-numeric) variables in the dataset.
 #print('There are {} categorical variables\n'.format(len(categorical)))
 #print('The categorical variables are :', categorical)
 """
@@ -97,7 +98,7 @@ dtype: int64
 """
 
 # view frequency of categorical variables
-# for var in categorical: print(df[var].value_counts())
+#for var in categorical: print(df[var].value_counts())
 
 # view frequency distribution of categorical variables
 #for var in categorical:  print(df[var].value_counts()/float(len(df)))
@@ -182,10 +183,32 @@ numerical = [var for var in df.columns if df[var].dtype!='O']
 There are 19 numerical variables
 The numerical variables are : ['MinTemp', 'MaxTemp', 'Rainfall', 'Evaporation', 'Sunshine', 'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm', 'Humidity9am', 'Humidity3pm', 'Pressure9am', 'Pressure3pm', 'Cloud9am', 'Cloud3pm', 'Temp9am', 'Temp3pm', 'Year', 'Month', 'Day']
 """
-
+#print(df[numerical].isnull().sum())
+"""
+MinTemp           1485
+MaxTemp           1261
+Rainfall          3261
+Evaporation      62790
+Sunshine         69835
+WindGustSpeed    10263
+WindSpeed9am      1767
+WindSpeed3pm      3062
+Humidity9am       2654
+Humidity3pm       4507
+Pressure9am      15065
+Pressure3pm      15028
+Cloud9am         55888
+Cloud3pm         59358
+Temp9am           1767
+Temp3pm           3609
+Year                 0
+Month                0
+Day                  0
+"""
 # view summary statistics in numerical variables
 #print(round(df[numerical].describe()),2)
-
+# On closer inspection, we can see that the Rainfall, Evaporation, WindSpeed9am and WindSpeed3pm 
+# columns may contain outliers.
 # draw boxplots to visualize outliers
 
 """
@@ -195,24 +218,25 @@ plt.subplot(2, 2, 1)
 fig = df.boxplot(column='Rainfall')
 fig.set_title('')
 fig.set_ylabel('Rainfall')
+plt.show()
 
 plt.subplot(2, 2, 2)
 fig = df.boxplot(column='Evaporation')
 fig.set_title('')
 fig.set_ylabel('Evaporation')
-
+plt.show()
 
 plt.subplot(2, 2, 3)
 fig = df.boxplot(column='WindSpeed9am')
 fig.set_title('')
 fig.set_ylabel('WindSpeed9am')
-
+plt.show()
 
 plt.subplot(2, 2, 4)
 fig = df.boxplot(column='WindSpeed3pm')
 fig.set_title('')
 fig.set_ylabel('WindSpeed3pm')
-
+plt.show()
 # plot histogram to check distribution
 
 plt.figure(figsize=(15,10))
@@ -222,24 +246,25 @@ plt.subplot(2, 2, 1)
 fig = df.Rainfall.hist(bins=10)
 fig.set_xlabel('Rainfall')
 fig.set_ylabel('RainTomorrow')
-
+plt.show()
 
 plt.subplot(2, 2, 2)
 fig = df.Evaporation.hist(bins=10)
 fig.set_xlabel('Evaporation')
 fig.set_ylabel('RainTomorrow')
-
+plt.show()
 
 plt.subplot(2, 2, 3)
 fig = df.WindSpeed9am.hist(bins=10)
 fig.set_xlabel('WindSpeed9am')
 fig.set_ylabel('RainTomorrow')
-
+plt.show()
 
 plt.subplot(2, 2, 4)
 fig = df.WindSpeed3pm.hist(bins=10)
 fig.set_xlabel('WindSpeed3pm')
 fig.set_ylabel('RainTomorrow')
+plt.show()
 """
 
 # find outliers for Rainfall variable
