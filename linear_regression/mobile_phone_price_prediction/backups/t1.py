@@ -27,7 +27,7 @@ def download_review_file(url):
     else:
         print(f"No Transparent Peer Review file found for {article_id}")
 
-def download_review_file(urls):
+def download_review_file_with_list_of_urls(urls):
     for url in urls:
         download_review_file(url)
 
