@@ -1,5 +1,5 @@
 # https://www.kaggle.com/code/prashant111/logistic-regression-classifier-tutorial/notebook#Explore-problems-within-categorical-variables
-# import numpy as np # linear algebra
+import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib.pyplot as plt # data visualization
 import seaborn as sns # statistical data visualization
@@ -295,3 +295,84 @@ Upper_fence = df.WindSpeed3pm.quantile(0.75) + (IQR * 3)
 #print('WindSpeed3pm outliers are values < {lowerboundary} or > {upperboundary}'.format(lowerboundary=Lower_fence, upperboundary=Upper_fence))
 # WindSpeed3pm outliers are values < -20.0 or > 57.0
 
+categorical = [var for var in df.columns if df[var].dtype=='O']
+#print(categorical)
+#['Location', 'WindGustDir', 'WindDir9am', 'WindDir3pm', 'RainToday', 'RainTomorrow']
+numerical = [var for var in df.columns if df[var].dtype!='O']
+#print(numerical)
+#['MinTemp', 'MaxTemp', 'Rainfall', 'Evaporation', 'Sunshine', 'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm', 'Humidity9am', 'Humidity3pm', 'Pressure9am', 'Pressure3pm', 'Cloud9am', 'Cloud3pm', 'Temp9am', 'Temp3pm', 'Year', 'Month', 'Day']
+
+"""
+print(df[numerical].isnull().sum())
+
+MinTemp           1485
+MaxTemp           1261
+Rainfall          3261
+Evaporation      62790
+Sunshine         69835
+WindGustSpeed    10263
+WindSpeed9am      1767
+WindSpeed3pm      3062
+Humidity9am       2654
+Humidity3pm       4507
+Pressure9am      15065
+Pressure3pm      15028
+Cloud9am         55888
+Cloud3pm         59358
+Temp9am           1767
+Temp3pm           3609
+Year                 0
+Month                0
+Day                  0
+"""
+"""
+# print the percentage of missing values in numerical variables
+for col in numerical:
+    if df[col].isnull().sum() > 0:
+        print(col,round(df[col].isnull().mean(),4))
+
+MinTemp 0.0102
+MaxTemp 0.0087
+Rainfall 0.0224
+Evaporation 0.4317
+Sunshine 0.4801
+WindGustSpeed 0.0706
+WindSpeed9am 0.0121
+WindSpeed3pm 0.0211
+Humidity9am 0.0182
+Humidity3pm 0.031
+Pressure9am 0.1036
+Pressure3pm 0.1033
+Cloud9am 0.3842
+Cloud3pm 0.4081
+Temp9am 0.0121
+Temp3pm 0.0248
+"""
+
+# impute missing values in numerical variables with mean
+for col in numerical:
+    col_mean = df[col].mean()
+    df[col] = df[col].fillna(col_mean)
+
+#print(df[numerical].isnull().sum())
+
+#print(df[categorical].isnull().mean())
+"""
+for col in categorical:
+    if df[col].isnull().mean() > 0:
+        print(col, round(df[col].isnull().mean(), 4))
+WindGustDir 0.071
+WindDir9am 0.0726
+WindDir3pm 0.0291
+RainToday 0.0224
+RainTomorrow 0.0225
+"""
+for col in categorical:
+    df[col] = df[col].fillna(df[col].mode()[0])
+
+#print(df[categorical].isnull().sum())
+
+print(df.isnull().sum())
+
+def max_value(mydf, col_name, max_v):
+    return np.where(mydf[col_name] > max_v, max_v, mydf[col_name])
