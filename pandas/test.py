@@ -88,10 +88,113 @@ ram_patterns = {
 }
 df['Ram'] = df['Ram'].str.strip().replace(ram_patterns)
 
-print(df['Ram'].value_counts(dropna=False))
+#df['Ram'] = df['Ram'].str.split(' ', expand=True)[0].astype(float)
+df['Ram'] = df['Ram'].str.extract(r'(\d+)')[0].astype(int)
+#print(df['Ram'].value_counts(dropna=False))
+
 
 # Fast charging
-print(df['fast_charging'].value_counts(dropna=False))
+df['fast_charging'] = df['fast_charging'].str.extract(r'(\d+)').astype(float)
+comany_fast_chargings = df.groupby('company')['fast_charging'].mean().items()
+comany_fast_charging_mapping = {k:v for k,v in comany_fast_chargings}
+condition = df['fast_charging'].isna()
+df.loc[condition, 'fast_charging'] = df.loc[condition, 'company'].map(comany_fast_charging_mapping)
+# df['fast_charging'] = df['fast_charging'].fillna(df.groupby('company')['fast_charging'].transform('mean'))
+df['fast_charging'] = df['fast_charging'].astype(int)
 # convert fast charging to numeric values
 # fill missing values with the mean of the company
 # convert all values to integers
+#print(df['fast_charging'].value_counts(dropna=False))
+
+#df.head().to_csv('test.csv', index=False)
+
+# Processor
+
+#print(df['Processor'].value_counts(dropna=False))
+
+"""
+company_process = df.groupby('company')['Processor'].apply(lambda x: x.mode()[0]).items()
+company_processor_mapping = {k:v for k,v in company_process}
+print(company_processor_mapping)
+condition = df['Processor'].isna()
+df.loc[condition, 'Processor'] = df.loc[condition, 'company'].map(company_processor_mapping)
+"""
+df['Processor'] = df['Processor'].fillna(' Octa Core')
+#print(df['Processor'].value_counts(dropna=False))
+
+processor_mapping = {
+    'Octa Core': 'Octa Core',
+    'Octa Core Processor': 'Octa Core',
+    'Quad Core': 'Quad Core',
+    'Deca Core': 'Deca Core',
+    'Deca Core Processor': 'Deca Core',
+    'Nine-Cores': 'Nine Core',
+    'Nine Core': 'Nine Core',
+    'Nine Cores': 'Nine Core',
+    '1.6 GHz Processor': '1.6 GHz Processor',
+    '2 GHz Processor': '2 GHz Processor',
+    '1.8 GHz Processor': '1.8 GHz Processor',
+    '1.3 GHz Processor': '1.3 GHz Processor',
+    '2.3 GHz Processor': '2.3 GHz Processor'
+}
+df['Processor'] = df['Processor'].str.strip().replace(processor_mapping)
+processor_mapping = {
+    'Octa Core': 8,
+    'Nine Core':'9',
+    'Deca Core':'10',
+    'Quad Core':'4',
+    '2 GHz Processor':'1',
+    '1.8 GHz Processor':'1',
+    '1.6 GHz Processor':'1',
+    '1.3 GHz Processor':'1',
+    '2.3 GHz Processor':'1'
+}
+df['Processor'] = df['Processor'].replace(processor_mapping).astype(int)
+#print(df['Processor'].value_counts(dropna=False))
+
+# screen resolution
+#print(df['Screen_resolution'].value_counts(dropna=False))
+import re
+def extract_resolution(resolution):
+    match = re.search(r'(\d+) x (\d+)',resolution)
+    if match:
+        int1 , int2 =map(int, match.groups())
+        return int1 * int2 / 1000
+    return 0
+
+df['Screen_resolution'] = df['Screen_resolution'].apply(extract_resolution)
+df = df[df['Screen_resolution'] != 0]
+df['Screen_resolution'] = df['Screen_resolution'].astype(int)
+#print(df['Screen_resolution'].value_counts(dropna=False))
+
+#print(df['No_of_sim'].value_counts(dropna=False))
+sim_columns = ['Dual Sim', 'Single Sim', '3G', '4G', '5G', 'VoLTE', 'Vo5G']
+for scol in sim_columns:
+    df['Sim_'+scol.lower().replace(" ","_")] = df['No_of_sim'].apply(lambda x: 1 if scol in x else 0)
+df.drop('No_of_sim',axis=1,inplace=True)
+
+#df.head().to_csv('test.csv', index=False)
+
+
+df['Camera'] = df['Camera'].str.extract(r'(\d+)').astype(str)
+comany_first_camera = df.groupby('company')['Camera'].apply(lambda x: x.mode()[0]).items()
+comany_first_camera_mapping = {k:v for k,v in comany_first_camera}
+condition = df['Camera'] == 'nan'
+df.loc[condition, 'Camera'] = df.loc[condition, 'company'].map(comany_first_camera_mapping)
+#print(df['Camera'].value_counts(dropna=False))
+df['Camera'] = df['Camera'].astype(int)
+#print(df.info())
+
+df.drop(['Processor_name','company','External_Memory'],axis=1,inplace=True)
+
+df['Battery'] = df['Battery'].str.extract(r'(\d+)').astype(int)
+df['Display'] = df['Display'].str.extract(r'(\d+)').astype(float)
+#df.head().to_csv('test.csv', index=False)
+
+
+df['Price'] = df['Price'].str.replace(',','').astype(int)
+#print(df['Price'].value_counts(dropna=False))
+
+#print(df.isnull().sum())
+#df.head().to_csv('test.csv', index=False)
+

@@ -151,22 +151,24 @@ df.drop('Date', axis=1, inplace = True)
 # let's do One Hot Encoding of Location variable
 # get k-1 dummy variables after One Hot Encoding 
 # preview the dataset with head() method
-
 pd.get_dummies(df.Location, drop_first=True).head()
+
+pd_dummies_location = pd.get_dummies(df.Location, drop_first=True)
 
 # let's do One Hot Encoding of WindGustDir variable
 # get k-1 dummy variables after One Hot Encoding 
 # also add an additional dummy variable to indicate there was missing data
 # preview the dataset with head() method
-
 pd.get_dummies(df.WindGustDir, drop_first=True, dummy_na=True).head()
+pd_dummies_windgustdir = pd.get_dummies(df.WindGustDir, drop_first=True, dummy_na=True)
 
 #print(df['WindDir9am'].unique())
-
 pd.get_dummies(df.WindDir9am, drop_first=True, dummy_na=True).head()
+pd_dummies_winddir9m = pd.get_dummies(df.WindDir9am, drop_first=True, dummy_na=True)
 pd.get_dummies(df.WindDir3pm, drop_first=True, dummy_na=True).head()
+pd_dummies_winddir3pm = pd.get_dummies(df.WindDir3pm, drop_first=True, dummy_na=True)
 
-pd.get_dummies(df.WindDir3pm, drop_first=True, dummy_na=True).sum(axis=0)
+#pd.get_dummies(df.WindDir3pm, drop_first=True, dummy_na=True).sum(axis=0)
 
 pd.get_dummies(df.RainToday, drop_first=True, dummy_na=True).head()
 
@@ -295,6 +297,21 @@ Upper_fence = df.WindSpeed3pm.quantile(0.75) + (IQR * 3)
 #print('WindSpeed3pm outliers are values < {lowerboundary} or > {upperboundary}'.format(lowerboundary=Lower_fence, upperboundary=Upper_fence))
 # WindSpeed3pm outliers are values < -20.0 or > 57.0
 
+def max_value(mydf, col_name, max_v):
+    return np.where(mydf[col_name] > max_v, max_v, mydf[col_name])
+
+df['Rainfall'] = max_value(df, 'Rainfall', 3.2)
+df['Evaporation'] = max_value(df, 'Evaporation', 21.8)
+df['WindSpeed9am'] = max_value(df, 'WindSpeed9am', 55.0)
+df['WindSpeed3pm'] = max_value(df, 'WindSpeed3pm', 57.0)
+
+#print(df['Rainfall'].describe())
+#print(df['Evaporation'].describe())
+#print(df['WindSpeed9am'].describe())
+#print(df['WindSpeed3pm'].describe())
+
+
+
 categorical = [var for var in df.columns if df[var].dtype=='O']
 #print(categorical)
 #['Location', 'WindGustDir', 'WindDir9am', 'WindDir3pm', 'RainToday', 'RainTomorrow']
@@ -372,7 +389,129 @@ for col in categorical:
 
 #print(df[categorical].isnull().sum())
 
-print(df.isnull().sum())
+#print(df.isnull().sum())
 
-def max_value(mydf, col_name, max_v):
-    return np.where(mydf[col_name] > max_v, max_v, mydf[col_name])
+#print(df[categorical].head())
+
+import category_encoders as ce
+encoder = ce.BinaryEncoder(cols=['RainToday'])
+df = encoder.fit_transform(df)
+
+categorical = [var for var in df.columns if df[var].dtype=='O']
+#print(categorical)
+
+df = pd.concat([df,pd_dummies_location,pd_dummies_windgustdir,pd_dummies_winddir9m,pd_dummies_winddir3pm ], axis=1)
+
+y = df['RainTomorrow']
+df.drop(categorical, axis=1, inplace=True)
+# Convert all boolean columns to integers (1/0) using .map
+
+
+
+duplicates = df.columns[df.columns.duplicated()].unique()
+
+for col in duplicates:
+    # Get all columns with the same name
+    cols = [c for c in df.columns if c == col]
+    # Convert to int and calculate row-wise average
+    df[str(col) + '_avg'] = df[cols].astype(int).mean(axis=1)
+    # Optionally, drop the original duplicate columns
+    df.drop(columns=cols, inplace=True)
+    df[col] = df.pop(str(col) + '_avg')
+
+df = df.loc[:, df.columns.notna()]
+duplicates = df.columns[df.columns.duplicated()]
+#print("Duplicate columns:", duplicates)
+#df.head().to_csv('weatherAUS_cleaned.csv', index=False)
+bool_cols = df.select_dtypes(include='bool').columns
+df[bool_cols] = df[bool_cols].astype(int)
+
+#print(df.shape) #(145460, 117)
+
+from sklearn.model_selection import train_test_split
+X = df
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+
+
+
+X_scaled = scaler.fit_transform(X)
+X = pd.DataFrame(X_scaled, columns=X.columns)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+from sklearn.linear_model import LogisticRegression
+# instantiate the model
+logreg = LogisticRegression(solver='liblinear', random_state=0)
+# fit the model
+logreg.fit(X_train, y_train)
+y_pred_test = logreg.predict(X_test)
+# print(y_pred_test) # ['No' 'No' 'No' ... 'Yes' 'No' 'No']
+# # probability of getting output as 0 - no rain
+#print(logreg.predict_proba(X_test)[:,0])
+# [0.86534973 0.74991153 0.79312423 ... 0.47766642 0.62890666 0.96848226]
+# probability of getting output as 1 - rain
+#print(logreg.predict_proba(X_test)[:,1])
+# [0.13465027 0.25008847 0.20687577 ... 0.52233358 0.37109334 0.03151774]
+
+from sklearn.metrics import accuracy_score
+
+#print('Model accuracy score: {0:0.4f}'. format(accuracy_score(y_test, y_pred_test)))
+# Model accuracy score: 0.8485
+
+y_pred_train = logreg.predict(X_train)
+y_pred_train
+#print('Training-set accuracy score: {0:0.4f}'. format(accuracy_score(y_train, y_pred_train)))
+# Training-set accuracy score: 0.8487
+
+#print('Training set score: {:.4f}'.format(logreg.score(X_train, y_train)))
+#print('Test set score: {:.4f}'.format(logreg.score(X_test, y_test)))
+#Training set score: 0.8487
+#Test set score: 0.8485
+
+# Print the Confusion Matrix and slice it into four pieces
+
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, y_pred_test)
+
+#print('Confusion matrix\n\n', cm)
+#[[21537  1189]
+#[ 3217  3149]]
+#print('\nTrue Positives(TP) = ', cm[0,0])
+# True Positives(TP) =  21537  (Actual Positive:1 and Predict Positive:1) 
+#print('\nTrue Negatives(TN) = ', cm[1,1])
+# True Negatives(TN) =  3149   (Actual Negative:0 and Predict Negative:0) 
+#print('\nFalse Positives(FP) = ', cm[0,1])
+# False Positives(FP) =  1189  (Actual Negative:0 but Predict Positive:1)
+#print('\nFalse Negatives(FN) = ', cm[1,0])
+# False Negatives(FN) =  3217  (Actual Positive:1 but Predict Negative:0) 
+
+import matplotlib.pyplot as plt
+cm_matrix = pd.DataFrame(data=cm, columns=['Actual Positive:1', 'Actual Negative:0'], 
+                                 index=['Predict Positive:1', 'Predict Negative:0'])
+
+sns.heatmap(cm_matrix, annot=True, fmt='d', cmap='YlGnBu')
+
+plt.title("Confusion Matrix")
+plt.ylabel("Predicted label")
+plt.xlabel("Actual label")
+
+#plt.show()
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred_test))
+"""
+              precision    recall  f1-score   support
+
+          No       0.87      0.95      0.91     22726
+         Yes       0.73      0.49      0.59      6366
+
+    accuracy                           0.85     29092
+   macro avg       0.80      0.72      0.75     29092
+weighted avg       0.84      0.85      0.84     29092
+"""

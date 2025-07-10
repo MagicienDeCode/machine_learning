@@ -1,0 +1,6 @@
+Rating,Spec_score,Ram,Battery,Display,Camera,Android_version,Price,Inbuilt_memory,fast_charging,Screen_resolution,Processor,HarmonyOS_version,Sim_dual_sim,Sim_single_sim,Sim_3g,Sim_4g,Sim_5g,Sim_volte,Sim_vo5g
+4.65,68,4,6000,6.0,50,13.0,9999,128,25,2600,8,0,1,0,1,1,1,1,0
+4.2,63,2,4000,6.0,13,10.0,9990,32,15,1123,1,0,1,0,1,1,0,1,0
+4.3,75,4,5000,6.0,50,12.0,11999,64,25,2600,1,0,1,0,1,1,0,1,0
+4.1,73,4,6000,6.0,48,12.0,11999,64,26,1152,8,0,1,0,1,1,0,1,0
+4.1,69,4,5000,6.0,13,11.0,11999,64,15,1152,8,0,1,0,1,1,0,1,0
