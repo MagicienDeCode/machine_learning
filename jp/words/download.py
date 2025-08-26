@@ -1,7 +1,6 @@
 from gtts import gTTS
 import os
 import pandas as pd
-import pykakasi
 
 files = ['hiragana.csv', 'katakana.csv']
 # Get the current script's directory
@@ -26,25 +25,23 @@ for file in files:
         
     df = pd.read_csv(file_path)
     first_column = df.columns[0]
-    words = df[first_column].tolist()
+    second_column = df.columns[1]
+    words = list(zip(df[first_column], df[second_column]))
     print(f"Processing {file} with {len(words)} words...")
     downloaded = 0
     skipped = 0
-    kks = pykakasi.kakasi()
-    for word in words:
+    for word,hira in words:
         save_path = os.path.join(output_dir, f"{word}.mp3")
         if os.path.exists(save_path):
             skipped += 1
             continue
-        result_list = kks.convert(word)
-        #print(result_list)
         if file.startswith('hiragana'):
-            current_hiragana = ''.join([item['hira'] for item in result_list])
-        if file.startswith('katakana'):
-            current_hiragana = ''.join([item['kana'] for item in result_list])
+            tts = gTTS(text=hira, lang='ja')
+        elif file.startswith('katakana'):
+            tts = gTTS(text=word, lang='ja')
         else:
-            current_hiragana = ''.join([item['hepburn'] for item in result_list])
-        tts = gTTS(text=current_hiragana, lang='ja')  # lang='ja' 表示日语
+           print(f"Unknown file type for {file}, skipping {word}")
+           continue
         tts.save(save_path)
         downloaded += 1
         print(f"saved {save_path}")
