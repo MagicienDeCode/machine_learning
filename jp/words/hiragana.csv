@@ -91,7 +91,7 @@ word, 平仮名, hiragana, english, chinese
 周辺, しゅうへん, shuuhen, Surroundings, 周围
 今日, きょう, kyou, Today, 今天
 明日, あした, ashita, Tomorrow, 明天
-朝っで, あさって, asatte, Day after tomorrow, 后天
+朝って, あさって, asatte, Day after tomorrow, 后天
 昨日, きのう, kinou, Yesterday, 昨天
 一昨日, おととい, ototoi, Day before yesterday, 前天
 月曜日, げつようび, getsuyoubi, Monday, 星期一
@@ -173,6 +173,29 @@ word, 平仮名, hiragana, english, chinese
 寝ます, ねます, nemasu, To sleep, 睡觉
 帰ります, かえります, kaerimasu, To return, 回家
 出かけます, でかけます, dekakemasu, To go out, 出门
-北京支社, ぺきんししゃ, pekin shisha, 北京分公司
+北京支社, ぺきんししゃ, pekin shisha,, 北京分公司
 神戸, こうべ, koube, Kobe, 神户
 誕生日, たんじょうび, tanjoubi, Birthday, 生日
+時刻, じこく, jikoku, Time, 时间
+一時, いちじ, ichiji, One o'clock, 一点
+二時, にじ, niji, Two o'clock, 两点
+三時, さんじ, sanji, Three o'clock, 三点
+四時, よじ, yoji, Four o'clock, 四点
+五時, ごじ, goji, Five o'clock, 五点
+六時, ろくじ, rokuji, Six o'clock, 六点
+七時, しちじ, shichiji, Seven o'clock, 七点
+八時, はちじ, hachiji, Eight o'clock, 八点
+九時, くじ, kuji, Nine o'clock, 九点
+十時, じゅうじ, juuji, Ten o'clock, 十点
+十一時, じゅういちじ, juuichiji, Eleven o'clock, 十一点
+いつ分, いつぷん, itsupun, one minute, 一分
+二分, にふん, nifun, Two minutes, 两分
+三分, さんぷん, sanpun, Three minutes, 三分
+四分, よんぷん, yonpun, Four minutes, 四分
+五分, ごふん, gofun, Five minutes, 五分
+六分, ろっぷん, roppun, Six minutes, 六分
+七分, ななふん, nanafun, Seven minutes, 七分
+八分, はっぷん, happun, Eight minutes, 八分
+九分, きゅうふん, kyuufun, Nine minutes, 九分
+十分, じゅっぷん, juppun, Ten minutes, 十分
+十一分, じゅういっぷん, juuippun, Eleven minutes, 十一分钟
