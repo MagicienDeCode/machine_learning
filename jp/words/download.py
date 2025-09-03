@@ -12,11 +12,11 @@ japanese_dir = current_dir
 # create a directory for the output files
 for file in files:
     dir_path = file.split('.')[0]
-    output_dir = os.path.join(current_dir, dir_path)
+    output_dir = os.path.join(current_dir, "downloads", dir_path)
     os.makedirs(output_dir, exist_ok=True)
     
     # Construct the correct path to CSV files
-    file_path = os.path.join(japanese_dir, file)
+    file_path = os.path.join(japanese_dir ,file)
     
     # Check if file exists before processing
     if not os.path.exists(file_path):

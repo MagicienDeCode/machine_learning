@@ -55,7 +55,7 @@ if __name__ == "__main__":
     first_column = df.columns[0]
 
     dir_path = selected_file.split('.')[0]
-    save_dir = os.path.join(current_dir, dir_path)
+    save_dir = os.path.join(current_dir, "downloads" ,dir_path)
     total_rows = len(df)
 
     skip = read_int(f"Enter the number of rows to skip (0 for no skip) max {total_rows}: ", 0, total_rows)

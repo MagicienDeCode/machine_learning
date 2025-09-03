@@ -55,7 +55,7 @@ if __name__ == "__main__":
     first_column = df.columns[0]
 
     dir_path = selected_file.split('.')[0]
-    save_dir = os.path.join(current_dir, dir_path)
+    save_dir = os.path.join(current_dir, "downloads" ,dir_path)
     total_rows = len(df)
     for index, row in df.iterrows():
         first_col_value = row.iloc[0]  # 取第一列值
