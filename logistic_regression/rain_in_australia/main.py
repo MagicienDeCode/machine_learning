@@ -496,15 +496,15 @@ cm_matrix = pd.DataFrame(data=cm, columns=['Actual Positive:1', 'Actual Negative
 
 sns.heatmap(cm_matrix, annot=True, fmt='d', cmap='YlGnBu')
 
-plt.title("Confusion Matrix")
-plt.ylabel("Predicted label")
-plt.xlabel("Actual label")
+#plt.title("Confusion Matrix")
+#plt.ylabel("Predicted label")
+#plt.xlabel("Actual label")
 
 #plt.show()
 
 from sklearn.metrics import classification_report
 
-print(classification_report(y_test, y_pred_test))
+#print(classification_report(y_test, y_pred_test))
 """
               precision    recall  f1-score   support
 
@@ -515,3 +515,113 @@ print(classification_report(y_test, y_pred_test))
    macro avg       0.80      0.72      0.75     29092
 weighted avg       0.84      0.85      0.84     29092
 """
+
+# 真正例 模型预测为 正类，实际也是 正类。例子：肿瘤检测中，模型预测有肿瘤，实际上病人确实有肿瘤。
+TP = cm[0,0]
+
+# 真反例 模型预测为 负类，实际也是 负类。例子：肿瘤检测中，模型预测无肿瘤，实际上病人确实无肿瘤。
+TN = cm[1,1]
+
+# 假正例 / I 型错误 模型预测为 正类，实际是 负类。例子：肿瘤检测中，模型预测有肿瘤，实际上病人无肿瘤。
+FP = cm[0,1]
+
+# 假反例 / II 型错误 模型预测为 负类，实际是 正类。例子：肿瘤检测中，模型预测无肿瘤，实际上病人有肿瘤。
+FN = cm[1,0]
+# print classification accuracy
+
+classification_accuracy = (TP + TN) / float(TP + TN + FP + FN)
+#print('Classification accuracy : {0:0.4f}'.format(classification_accuracy))
+
+classification_error = (FP + FN) / float(TP + TN + FP + FN)
+#print('Classification error : {0:0.4f}'.format(classification_error))
+
+# Precision can be defined as the percentage of correctly predicted positive outcomes out of all the predicted positive outcomes. 
+# It can be given as the ratio of true positives (TP) to the sum of true and false positives (TP + FP).
+# 在模型预测为正的样本里，有多少是真的正的。
+precision = TP / float(TP + FP)
+#print('Precision : {0:0.4f}'.format(precision))
+
+# Recall can be defined as the percentage of correctly predicted positive outcomes out of all the actual positive outcomes. 
+# It can be given as the ratio of true positives (TP) to the sum of true positives and false negatives (TP + FN). Recall is also called Sensitivity.
+# 在实际为正的样本里，有多少被模型找出来了。 True Positive
+recall = TP / float(TP + FN)
+#print('Recall or Sensitivity : {0:0.4f}'.format(recall))
+
+# F1-score 是 Precision 和 Recall 的调和平均数
+
+f1_score = 2 * (precision * recall) / (precision + recall)
+#print('F1-score : {0:0.4f}'.format(f1_score))
+
+# threshold
+# print the first 10 predicted probabilities of two classes- 0 and 1
+
+y_pred_prob = logreg.predict_proba(X_test)[0:10]
+#print(y_pred_prob)
+"""
+[[0.86534973 0.13465027]
+ [0.74991153 0.25008847]
+ [0.79312423 0.20687577]
+ [0.55824255 0.44175745]
+ [0.93058262 0.06941738]
+ [0.96765262 0.03234738]
+ [0.60057727 0.39942273]
+ [0.53642722 0.46357278]
+ [0.77244898 0.22755102]
+ [0.7866863  0.2133137 ]]
+"""
+y_pred_prob_df = pd.DataFrame(data=y_pred_prob, columns=['Prob of - No rain tomorrow (0)', 'Prob of - Rain tomorrow (1)'])
+#print(y_pred_prob)
+# print the first 10 predicted probabilities for class 1 - Probability of rain
+#y_pred1 = logreg.predict_proba(X_test)[0:10, 1]
+#print(y_pred1)
+y_pred1 = logreg.predict_proba(X_test)[:, 1]
+
+# clean previous photos
+plt.clf()
+# adjust the font size 
+plt.rcParams['font.size'] = 12
+# plot histogram with 10 bins
+plt.hist(y_pred1, bins = 10)
+# set the title of predicted probabilities
+plt.title('Histogram of predicted probabilities of rain')
+# set the x-axis limit
+plt.xlim(0,1)
+# set the title
+plt.xlabel('Predicted probabilities of rain')
+plt.ylabel('Frequency')
+#plt.show()
+
+# ROC ROC curve help us to choose a threshold level that balances sensitivity and specificity for a particular context.
+
+from sklearn.metrics import roc_curve
+
+fpr, tpr, thresholds = roc_curve(y_test, y_pred1, pos_label = 'Yes')
+plt.clf()
+plt.figure(figsize=(6,4))
+plt.plot(fpr, tpr, linewidth=2)
+plt.plot([0,1], [0,1], 'k--' )
+plt.rcParams['font.size'] = 12
+plt.title('ROC curve for RainTomorrow classifier')
+plt.xlabel('False Positive Rate (1 - Specificity)')
+plt.ylabel('True Positive Rate (Sensitivity)')
+#plt.show()
+
+# ROC AUC stands for Receiver Operating Characteristic - Area Under Curve.
+#  It is a technique to compare classifier performance. In this technique,
+#  we measure the area under the curve (AUC). A perfect classifier will have a ROC AUC equal to 1, 
+# whereas a purely random classifier will have a ROC AUC equal to 0.5.
+# So, ROC AUC is the percentage of the ROC plot that is underneath the curve.
+
+from sklearn.metrics import roc_auc_score
+
+ROC_AUC = roc_auc_score(y_test, y_pred1)
+#print('ROC AUC : {:.4f}'.format(ROC_AUC))
+
+# calculate cross-validated ROC AUC 
+
+from sklearn.model_selection import cross_val_score
+
+Cross_validated_ROC_AUC = cross_val_score(logreg, X_train, y_train, cv=5, scoring='roc_auc').mean()
+#print('Cross validated ROC AUC : {:.4f}'.format(Cross_validated_ROC_AUC))
+
+# k-Fold Cross Validation 
