@@ -625,3 +625,57 @@ Cross_validated_ROC_AUC = cross_val_score(logreg, X_train, y_train, cv=5, scorin
 #print('Cross validated ROC AUC : {:.4f}'.format(Cross_validated_ROC_AUC))
 
 # k-Fold Cross Validation 
+
+# Applying 5-Fold Cross Validation
+
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(logreg, X_train, y_train, cv = 5, scoring='accuracy')
+# print('Cross-validation scores:{}'.format(scores))
+# Cross-validation scores:[0.84854344 0.84927387 0.8496176  0.84535728 0.84883771]
+# print('Average cross-validation score: {:.4f}'.format(scores.mean()))
+# Average cross-validation score: 0.8483
+
+from sklearn.model_selection import GridSearchCV
+parameters = [{'penalty':['l1','l2']}, 
+              {'C':[1, 10, 100, 1000]}]
+
+grid_search = GridSearchCV(estimator = logreg,  
+                           param_grid = parameters,
+                           scoring = 'accuracy',
+                           cv = 5,
+                           verbose=0)
+
+grid_search.fit(X_train, y_train)
+
+# best score achieved during the GridSearchCV
+#print('GridSearch CV best score : {:.4f}\n\n'.format(grid_search.best_score_))
+# GridSearch CV best score : 0.8483
+# print parameters that give the best results
+# print('Parameters that give the best results :','\n\n', (grid_search.best_params_))
+# print estimator that was chosen by the GridSearch
+# print('\n\nEstimator that was chosen by the search :','\n\n', (grid_search.best_estimator_))
+# LogisticRegression(penalty='l1', random_state=0, solver='liblinear')
+
+print('GridSearch CV score on test set: {0:0.4f}'.format(grid_search.score(X_test, y_test)))
+# GridSearch CV score on test set: 0.8484
+
+# result & conclusion
+# 1. The logistic regression model accuracy score is 0.8501. So, the model does a very good job in predicting whether or not it will rain tomorrow in Australia.
+
+# 2. Small number of observations predict that there will be rain tomorrow. Majority of observations predict that there will be no rain tomorrow.
+
+# 3. The model shows no signs of overfitting.
+
+# 4. Increasing the value of C results in higher test set accuracy and also a slightly increased training set accuracy. So, we can conclude that a more complex model should perform better.
+
+# 5. Increasing the threshold level results in increased accuracy.
+
+# 6. ROC AUC of our model approaches towards 1. So, we can conclude that our classifier does a good job in predicting whether it will rain tomorrow or not.
+
+# 7. Our original model accuracy score is 0.8501 whereas accuracy score after RFECV is 0.8500. So, we can obtain approximately similar accuracy but with reduced set of features.
+
+# 8. In the original model, we have FP = 1175 whereas FP1 = 1174. So, we get approximately same number of false positives. Also, FN = 3087 whereas FN1 = 3091. So, we get slighly higher false negatives.
+
+# 9. ur, original model score is found to be 0.8476. The average cross-validation score is 0.8474. So, we can conclude that cross-validation does not result in performance improvement.
+
+# 10. Our original model test accuracy is 0.8501 while GridSearch CV accuracy is 0.8507. We can see that GridSearch CV improve the performance for this particular model.
