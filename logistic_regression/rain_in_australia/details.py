@@ -430,7 +430,7 @@ df[bool_cols] = df[bool_cols].astype(int)
 
 from sklearn.model_selection import train_test_split
 X = df
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
