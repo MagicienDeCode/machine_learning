@@ -38,7 +38,6 @@ class SnakeGame:
 
         self.silent_mode = silent_mode
         if not self.silent_mode:
-            os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '0'
             pygame.init()
             pygame.display.set_caption('Snake Game By ilun')
             self.screen = pygame.display.set_mode((self.display_width, self.display_height))
