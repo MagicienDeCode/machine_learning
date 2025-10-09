@@ -215,7 +215,6 @@ word, 平仮名, hiragana, english, chinese
 飛行機, ひこうき, hikouki, Airplane, 飞机
 電車, でんしゃ, densha, Train, 电车
 美術館, びじゅつかん, bijutsukan, Art museum, 美术馆
-友達, ともだち, tomodachi, Friend, 朋友
 行きます, いきます, ikimasu, To go, 去
 来ます, きます, kimasu, To come, 来
 買います, かいます, kaimasu, To buy, 买
@@ -235,4 +234,42 @@ word, 平仮名, hiragana, english, chinese
 大変ですね, たいへんですね, taihen desu ne, That's tough, 受够了
 歳月, さいげつ, saigetsu, Months and years, 岁月
 動詞, どうし, doushi, Verb, 动词
-買い物, かいもの, kaimono, Shopping, 买东西
+お粥, おかゆ, okayu, Rice porridge, 稀饭
+昼ご飯, ひるごはん, hirugohan, Lunch, 午饭
+晩ご飯, ばんごはん, bangohan, Dinner, 晚饭
+牛乳, ぎゅうにゅう, gyuunyuu, Milk, 牛奶
+お弁当, おべんとう, obentou, Boxed lunch, 便当
+朝ご飯, あさごはん, asagohan, Breakfast, 早饭
+うどん, うどん, udon, Udon noodles, 乌冬面
+親子丼, おやこどん, oyakodon, Chicken and egg bowl, 鸡肉鸡蛋盖饭
+卵, たまご, tamago, Egg, 鸡蛋
+玉子, たまご, tamago, Egg, 鸡蛋
+蕎麦屋, そばや, sobaya, Soba noodle shop, 荞麦面店
+野球, やきゅう, yakyuu, Baseball, 棒球
+申込書, もうしこみしょ, moushikomi sho, Application form, 申请书
+手紙, てがみ, tegami, Letter, 信
+音楽, おんがく, ongaku, Music, 音乐
+映画, えいが, eiga, Movie, 电影
+動物園, どうぶつえん, doubutsuen, Zoo, 动物园
+飲みます, のみます, nomimasu, To drink, 喝
+食べます, たべます, tabemasu, To eat, 吃
+撮ります, とります, torimasu, To take (a photo), 拍照
+会います, あいます, aimasu, To meet, 见面
+泳ぎます, およぎます, oyogimasu, To swim, 游泳
+手紙を書きます, てがみをかきます, tegami o kakimasu, To write a letter, 写信
+新聞を読みます, しんぶんをよみます, shinbun o yomimasu, To read a newspaper, 读报纸
+聞きます, ききます, kikimasu, To listen, 听
+話します, はなします, hanashimasu, To speak, 说
+見ます, みます, mimasu, To see, 看
+します, します, shimasu, To do, 做
+掃除します, そうじします, souji shimasu, To clean, 打扫
+これから, これから, kore kara, From now on, 从现在起
+また来ます, またきます, mata kimasu, I'll come again, 我还会再来的
+日本へよくそ, にほんへようこそ, nihon e youkoso, Welcome to Japan, 欢迎来到日本
+いっできます, いってきます, ittekimasu, I'm off, 我出去了
+いっでらっしゃい, いってらっしゃい, itterasshai, See you later, 路上小心
+ただいま, ただいま, tadaima, I'm home, 我回来了
+お帰りなさい, おかえりなさい, okaerinasai, Welcome home, 欢迎回家
+お邪魔します, おじゃまします, ojama shimasu, Excuse me for disturbing you, 打扰了
+お邪魔しました, おじゃましました, ojama shimashita, Thank you for having me, 打扰了
+午前中, ごぜんちゅう, gozenchuu, In the morning, 上午
