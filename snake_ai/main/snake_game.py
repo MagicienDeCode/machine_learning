@@ -7,10 +7,10 @@ from pygame import mixer
 
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
-UP = 1
-DOWN = 2
-LEFT = 3
-RIGHT = 4
+UP = 0
+DOWN = 1
+LEFT = 2
+RIGHT = 3
 WELLCOME = 10
 RUNNING = 11
 GAME_OVER = 12
@@ -48,6 +48,12 @@ class SnakeGame:
             self.eat_sound = mixer.Sound("sounds/eat.wav")
             self.game_over_sound = mixer.Sound("sounds/game_over.wav")
             self.victory_sound = mixer.Sound("sounds/victory.wav")
+
+            head_down = pygame.transform.scale(pygame.image.load("images/snake_head.png"), (self.cell_size+20, self.cell_size+20))
+            head_up = pygame.transform.rotate(head_down, 180)
+            head_right = pygame.transform.rotate(head_down, 90)
+            head_left = pygame.transform.rotate(head_down, -90)
+            self.heads = [head_up, head_down, head_left, head_right]
         else:
             self.screen = None
             self.font = None
@@ -218,11 +224,12 @@ class SnakeGame:
                 sys.exit()
     
     def draw_snake(self):
+        
         # Draw the head
         head_r, head_c = self.snake[0]
         head_x = head_c * self.cell_size + self.border_size
         head_y = head_r * self.cell_size + self.border_size
-
+        """
         # Draw the head (Blue)
         pygame.draw.polygon(self.screen, (100, 100, 255), [
             (head_x + self.cell_size // 2, head_y),
@@ -235,6 +242,10 @@ class SnakeGame:
         eye_offset = self.cell_size // 4
         pygame.draw.circle(self.screen, WHITE, (head_x + eye_offset, head_y + eye_offset), eye_size)
         pygame.draw.circle(self.screen, WHITE, (head_x + self.cell_size - eye_offset, head_y + eye_offset), eye_size)
+        """
+        # Draw the head
+        head_img = self.heads[self.direction]
+        self.screen.blit(head_img, (head_x-10, head_y-10))
 
         # Draw the body (color gradient)
         color_list = np.linspace(255, 100, len(self.snake), dtype=np.uint8)
