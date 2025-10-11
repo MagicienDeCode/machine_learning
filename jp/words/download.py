@@ -1,8 +1,18 @@
 from gtts import gTTS
 import os
 import pandas as pd
+import json
 
-files = ['hiragana.csv', 'katakana.csv']
+config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+if os.path.exists(config_path):
+    with open(config_path, "r", encoding="utf-8") as f:
+        json_date = json.load(f)
+    print("Loaded JSON:", json_date)
+else:
+    print(f"File {config_path} does not exist.")
+    exit(-1)
+
+files = json_date.get("files", [])
 # Get the current script's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 # Get the japanese directory path (two levels up)
