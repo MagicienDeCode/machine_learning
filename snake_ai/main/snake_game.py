@@ -139,7 +139,7 @@ class SnakeGame:
         self._draw_button(QUIT_TEXT, (self.display_width // 2, self.display_height // 2 + 10 + start_button.get_height()))
         pygame.display.flip() # Update the full display Surface to the screen
 
-    def play_step(self, action):
+    def step(self, action):
         self._update_direction(action)
 
         # Move the snake
@@ -331,7 +331,7 @@ if __name__ == "__main__":
             game.draw_game_over()
         if game_state == RUNNING:
             if time.time() - start_time >= update_interval:
-                done, _ = game.play_step(action)
+                done, _ = game.step(action)
                 game.render()
                 start_time = time.time()
 
