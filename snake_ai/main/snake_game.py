@@ -49,7 +49,7 @@ class SnakeGame:
             self.game_over_sound = mixer.Sound("sounds/game_over.wav")
             self.victory_sound = mixer.Sound("sounds/victory.wav")
 
-            head_down = pygame.transform.scale(pygame.image.load("images/snake_head.png"), (self.cell_size+20, self.cell_size+20))
+            head_down = pygame.transform.scale(pygame.image.load("images/snake_head.png"), (self.cell_size+10, self.cell_size+10))
             head_up = pygame.transform.rotate(head_down, 180)
             head_right = pygame.transform.rotate(head_down, 90)
             head_left = pygame.transform.rotate(head_down, -90)
@@ -152,7 +152,7 @@ class SnakeGame:
         # if snake eated the food
         if (r,c) == self.food:
             food_eated = True
-            self.score += 1
+            self.score += 10
             if not self.silent_mode:
                 self.eat_sound.play()
         else:
@@ -245,7 +245,7 @@ class SnakeGame:
         """
         # Draw the head
         head_img = self.heads[self.direction]
-        self.screen.blit(head_img, (head_x-10, head_y-10))
+        self.screen.blit(head_img, (head_x-5, head_y-5))
 
         # Draw the body (color gradient)
         color_list = np.linspace(255, 100, len(self.snake), dtype=np.uint8)
