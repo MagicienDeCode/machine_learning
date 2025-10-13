@@ -69,7 +69,7 @@ for episode in range(NUM_EPISODES):
             else:
                 last_action = ['UP', 'DOWN', 'LEFT', 'RIGHT'][action]
         elif info['food_eated']:
-            print(f"Food eated at step {step}!, food reward: {reward}, step reward: {sum_step_reward}")
+            print(f"Food eated at step {step}!, food reward: {reward:.4f}, step reward: {sum_step_reward:.4f}")
         else:
             sum_step_reward += reward
         
@@ -82,7 +82,7 @@ for episode in range(NUM_EPISODES):
     max_score = max(max_score, episode_score)
 
     snake_size = info['snake_size'] + 1
-    print(f"Episode {episode+1} ended. score: {episode_score}, snake size: {snake_size}, steps: {step}, total reward: {info['total_rewards']}")
+    print(f"Episode {episode+1} ended. score: {episode_score}, snake size: {snake_size}, steps: {step}, total reward: {total_rewards}")
     total_rewards += episode_reward
     total_score += episode_score
     if RENDER:
