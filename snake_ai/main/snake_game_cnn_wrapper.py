@@ -110,7 +110,7 @@ class SnakeGameCNNWrapper(gym.Env):
             reward = reward * 0.1
         return obs, reward, self.done, self.done, info
     
-    def reder(self):
+    def render(self):
         self.game.render()
 
     def get_action_mask(self):

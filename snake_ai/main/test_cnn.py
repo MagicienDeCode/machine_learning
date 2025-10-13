@@ -34,7 +34,12 @@ min_score = 1000000000
 max_score = 0
 
 for episode in range(NUM_EPISODES):
-    obs = env.reset()
+    # Gymnasium Env.reset() returns (obs, info). Ensure we only pass the observation to the model.
+    reset_ret = env.reset()
+    if isinstance(reset_ret, tuple) and len(reset_ret) == 2:
+        obs, reset_info = reset_ret
+    else:
+        obs = reset_ret
     episode_reward = 0
     done = False
     step = 0
@@ -44,11 +49,19 @@ for episode in range(NUM_EPISODES):
     retry_limit = 9
     print(f"==========Episode {episode+1}/{NUM_EPISODES} ==========")
     while not done:
+        # model.predict expects a raw observation (np.array or dict), not a (obs, info) tuple.
         action, _ = model.predict(obs, action_masks=env.get_action_mask())
         prev_mask = env.get_action_mask()
         prev_direction = env.game.direction
         step += 1
-        obs, reward, done, info = env.step(action)
+        # Gymnasium Env.step() can return either 4-tuple (obs, reward, done, info)
+        # or 5-tuple (obs, reward, terminated, truncated, info). Handle both.
+        step_ret = env.step(action)
+        if isinstance(step_ret, tuple) and len(step_ret) == 5:
+            obs, reward, terminated, truncated, info = step_ret
+            done = terminated or truncated
+        else:
+            obs, reward, done, info = step_ret
 
         if done:
             if info['snake_size'] == env.game.grid_size:
@@ -69,7 +82,7 @@ for episode in range(NUM_EPISODES):
     max_score = max(max_score, episode_score)
 
     snake_size = info['snake_size'] + 1
-    print(f"Episode {episode+1} ended. score: {episode_score}, snake size: {snake_size}, steps: {step}, total reward: {info['total_reward']}")
+    print(f"Episode {episode+1} ended. score: {episode_score}, snake size: {snake_size}, steps: {step}, total reward: {info['total_rewards']}")
     total_rewards += episode_reward
     total_score += episode_score
     if RENDER:
