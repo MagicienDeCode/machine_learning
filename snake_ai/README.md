@@ -1,11 +1,5 @@
 # Environment Configuration
 
-```bash
-conda create -n snake python=3.13.4
-conda activate snake
-# (snake) your_name:snake_ai[master]% 
-```
-
 # MLP VS CNN
 
 | 项目       | **MLP**               | **CNN**                      |
