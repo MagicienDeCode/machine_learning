@@ -12,7 +12,7 @@ from stable_baselines3.common.callbacks import CheckpointCallback
 from sb3_contrib import MaskablePPO
 from sb3_contrib.common.wrappers import ActionMasker
 
-from tetrix_game_cnn_wrapper import TetrixGameCNNWrapper
+from tetris_game_cnn_wrapper import TetrixGameCNNWrapper
 
 if torch.backends.mps.is_available():
     NUM_ENV = 32*2
