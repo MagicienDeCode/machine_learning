@@ -491,6 +491,10 @@ class TetrisGame:
         self.draw_level()
 
         pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
     
 if __name__ == "__main__":
     import time

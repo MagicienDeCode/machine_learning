@@ -2,7 +2,6 @@ import time
 import random
 
 import torch
-import pygame
 
 from sb3_contrib import MaskablePPO
 
@@ -76,7 +75,6 @@ for episode in range(NUM_EPISODES):
             sum_step_reward += reward
 
         if RENDER:
-            pygame.event.pump()  # Process pygame events to keep window responsive
             env.render()
             time.sleep(FRAME_DELAY)
 
@@ -88,11 +86,7 @@ for episode in range(NUM_EPISODES):
     total_rewards += episode_reward
     total_score += episode_score
     if RENDER:
-        # Process events during delay to keep window responsive
-        end_time = time.time() + ROUND_DELAY
-        while time.time() < end_time:
-            pygame.event.pump()
-            time.sleep(0.1)
+        time.sleep(ROUND_DELAY)
 
 env.close()
 print(f"========== Summary ==========")
