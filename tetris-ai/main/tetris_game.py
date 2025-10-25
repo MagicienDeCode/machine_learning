@@ -223,9 +223,7 @@ class TetrisGame:
         self.board_colors = [[BLACK for _ in range(self.board_w)] for _ in range(self.board_h + self.hidden_h)]
 
         # Current and next pieces
-        self.current_tetrix = None
-        self.next_tetrix = self._random_next_tetrix()
-        self._spawn_new_tetrix()
+        self.reset()
 
     def reset(self):
         self.score = 0

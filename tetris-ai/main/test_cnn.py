@@ -2,10 +2,11 @@ import time
 import random
 
 import torch
+import pygame
 
 from sb3_contrib import MaskablePPO
 
-from tetrix_game_cnn_wrapper import TetrixGameCNNWrapper
+from tetris_game_cnn_wrapper import TetrixGameCNNWrapper
 
 if torch.backends.mps.is_available():
     MODEL_PATH = r"trained_models_cnn_mps/ppo_tetris_final"
@@ -75,6 +76,7 @@ for episode in range(NUM_EPISODES):
             sum_step_reward += reward
 
         if RENDER:
+            pygame.event.pump()  # Process pygame events to keep window responsive
             env.render()
             time.sleep(FRAME_DELAY)
 
@@ -86,7 +88,11 @@ for episode in range(NUM_EPISODES):
     total_rewards += episode_reward
     total_score += episode_score
     if RENDER:
-        time.sleep(ROUND_DELAY)
+        # Process events during delay to keep window responsive
+        end_time = time.time() + ROUND_DELAY
+        while time.time() < end_time:
+            pygame.event.pump()
+            time.sleep(0.1)
 
 env.close()
 print(f"========== Summary ==========")
