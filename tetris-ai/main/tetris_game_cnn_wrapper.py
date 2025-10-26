@@ -46,6 +46,12 @@ class TetrixGameCNNWrapper(gym.Env):
         # Training phase for weight adjustment
         self.training_phase = training_phase  # 'early' or 'late'
 
+        # Track piece lifetime (steps since piece spawned) to encourage dropping
+        self.piece_step_count = 0
+
+        # Track if piece has been rotated this lifetime
+        self.piece_has_rotated = False
+
     def seed(self, seed=None):
         self.np_random, seed = gym.utils.seeding.np_random(seed)
         random.seed(seed)
@@ -62,6 +68,8 @@ class TetrixGameCNNWrapper(gym.Env):
         self.prev_lines_cleared = 0
         self.prev_hole_count = 0
         self.prev_max_height = 0
+        self.piece_step_count = 0
+        self.piece_has_rotated = False
         return self._generate_observation(), {}
 
     def _generate_observation(self):
@@ -130,10 +138,23 @@ class TetrixGameCNNWrapper(gym.Env):
         landing_height = current_max_height - self.prev_max_height
         return max(landing_height, 0)  # Ensure non-negative
 
+    def _get_piece_y_position(self):
+        """
+        Get the current piece's Y position (topmost cell).
+        Returns the Y coordinate from the top (0 = top of board).
+        """
+        if self.game.current_tetrix:
+            return self.game.current_tetrix.y
+        return 0
+
     def step(self, action):
         # Store state before action
         prev_holes = self.prev_hole_count
         prev_max_height = self.prev_max_height
+        piece_y_before = self._get_piece_y_position()
+
+        # Increment piece lifetime counter
+        self.piece_step_count += 1
 
         self.done, current_score = self.game.step(action)
         obs = self._generate_observation()
@@ -143,6 +164,7 @@ class TetrixGameCNNWrapper(gym.Env):
         # Calculate state metrics after action
         current_holes = self._count_holes()
         current_max_height = self._get_max_height()
+        piece_y_after = self._get_piece_y_position()
 
         # Calculate reward based on the new strategy
         reward = 0.0
@@ -169,56 +191,85 @@ class TetrixGameCNNWrapper(gym.Env):
         if self.step_counter > self.step_limit:
             self.done = True
 
-        # Calculate rewards based on Dense Reward A+ strategy
+        # Calculate rewards based on improved strategy
         if self.done:
-            # 6. Game over penalty
+            # Game over penalty
             reward -= 10.0
             if not self.silent_mode and current_score > 0:
                 self.game.game_over_sound.play()
         else:
-            # 2. Survival reward: +0.01 for each step survived
-            reward += 0.01
+            # Check if piece was placed (spawned a new piece)
+            piece_was_placed = (current_max_height != prev_max_height or current_holes != prev_holes)
 
             # 1. Line clear rewards
             if lines_cleared > 0:
-                # 1.1 Reward +1.0 for each line cleared
-                reward += 1.0 * lines_cleared
+                # Reward +2.0 for each line cleared (increased from 1.0)
+                reward += 2.0 * lines_cleared
 
-                # 1.2 Additional +5.0 bonus for clearing 4 lines at once (Tetris)
+                # Additional +8.0 bonus for clearing 4 lines at once (increased from 5.0)
                 if lines_cleared >= 4:
-                    reward += 5.0
+                    reward += 8.0
 
-            # 3. Landing height penalty (when piece lands)
-            # A piece lands when the board state changes (holes or height changes)
-            if current_max_height != prev_max_height or current_holes != prev_holes:
+            # 2. Landing height penalty (when piece lands)
+            if piece_was_placed:
                 landing_height = current_max_height
                 reward -= 0.1 * landing_height
 
-            # 4. Hole penalty
+            # 3. Hole penalty
             holes_added = current_holes - prev_holes
             if holes_added > 0:
                 reward -= 0.5 * holes_added
 
-            # 5. Drop action reward (conditional)
+            # 4. DROP ACTION REWARD - Strongly encourage dropping
             if action == DOWN:
-                # Simple heuristic: reward drop if it leads to good outcomes
-                drop_reward = 0.0
+                # Base drop reward: significantly increased
+                drop_reward = 0.5  # Base reward for dropping (increased from 0.05)
 
-                # Condition: If drop clears lines
+                # Bonus if drop clears lines
                 if lines_cleared > 0:
-                    drop_reward = 0.1
-                # Condition: If drop doesn't create new holes and height increase is small
-                elif holes_added == 0 and (current_max_height - prev_max_height) <= 1:
-                    drop_reward = 0.05
-                # Condition: If current height is low (< 10 cells)
-                elif current_max_height < 10:
-                    drop_reward = 0.05
+                    drop_reward += 1.0
 
-                # 7. Weight adjustment by training phase
-                if self.training_phase == 'late':
-                    drop_reward *= 2.0  # Double the reward in late phase
+                # Bonus if drop doesn't create new holes
+                if holes_added == 0:
+                    drop_reward += 0.2
+
+                # Bonus if piece has been rotated before dropping
+                if self.piece_has_rotated:
+                    drop_reward += 0.3  # Reward for rotate -> drop pattern
 
                 reward += drop_reward
+
+                # Reset piece tracking after drop
+                self.piece_step_count = 0
+                self.piece_has_rotated = False
+
+            # 5. ROTATION ACTION REWARD/PENALTY - Encourage early rotation
+            elif action == ROTATE:
+                self.piece_has_rotated = True
+
+                # Reward early rotation (when piece is high/near top)
+                # Y position 0-8 is high (near top), reward rotation
+                if piece_y_before < 8:
+                    reward += 0.15  # Reward early rotation
+                # Penalty for late rotation (when piece is low/near bottom)
+                # Y position > 15 is very low, penalize rotation
+                elif piece_y_before > 15:
+                    reward -= 0.2  # Penalty for late rotation
+
+            # 6. NON-DROP ACTION PENALTY - Discourage endless movement
+            else:  # LEFT or RIGHT actions
+                # Small penalty for horizontal movement to encourage dropping
+                reward -= 0.02
+
+                # Larger penalty if piece has been alive too long
+                if self.piece_step_count > 15:
+                    reward -= 0.05 * (self.piece_step_count - 15)  # Escalating penalty
+
+            # 7. PIECE LIFETIME PENALTY - Strong penalty for pieces that don't drop
+            if not piece_was_placed and self.piece_step_count > 10:
+                # Exponential penalty for pieces that take too long
+                lifetime_penalty = 0.01 * (self.piece_step_count - 10) ** 1.5
+                reward -= lifetime_penalty
 
         # Update tracking variables for next step
         self.prev_score = current_score
