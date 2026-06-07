@@ -26,5 +26,11 @@ solution = Solution()
 
 
 "expected result" 
+# [0,1] ok
+# [1,0] ok
+{[0,1], [1,0]}
+if  solution.twoSum() in {[0,1], [1,0]}:
+    print("ok")
+
 [0,1] == solution.twoSum()
 

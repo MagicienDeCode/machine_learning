@@ -281,7 +281,7 @@ if __name__ == "__main__":
     quit_button = game.font.render(QUIT_TEXT, True, WHITE)
 
     action = None
-    update_interval = 0.5
+    update_interval = 0.25
     start_time = time.time()
 
     while True:
