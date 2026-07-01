@@ -24,7 +24,10 @@ for file in current.iterdir():
 
 print("="*20)
 
-# cd then mkdir t1
+# cd then mkdir t1, 
+# parents=True if parent folder does not exist, exist_ok=True if folder exists, do not raise error
+# exist_ok=True is useful when you want to create a folder if it does not exist, but do nothing if it already exists.
+# mkdir -p t1/t2/t3
 Path("./t1").mkdir(parents=True, exist_ok=True)
 
 # cp lst.py to test.txt
