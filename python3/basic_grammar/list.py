@@ -1,5 +1,5 @@
 from typing import List
-# declare an int list with values 1,9,9,4
+# declare an int list with values 1,9,9,5
 
 # print entire my_list
 
@@ -10,6 +10,8 @@ from typing import List
 # for loop, print each index of my_list
 
 # for loop, print each element of my_list
+
+# range
 
 # declare a string list named str_list contains "python3","kotlin","java"
 
