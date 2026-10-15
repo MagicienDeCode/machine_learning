@@ -55,3 +55,10 @@ with open("test.py", "r", encoding="utf-8") as f:
     text = f.read()
 
 print(text)
+
+text = text + "test "
+# write file
+with open("test_write.txt", "w", encoding="utf-8") as f:
+    f.write(text)
+
+print("="*20)
