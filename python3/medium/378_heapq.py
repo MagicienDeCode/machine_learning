@@ -20,5 +20,7 @@ while len(pq):
 
 pq2 = [1,9,9,5]
 heapq.heapify(pq2)
+
+print(pq2[0])
 while len(pq2):
     print(heapq.heappop(pq2))
