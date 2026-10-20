@@ -1,0 +1,801 @@
+[
+  {
+    "slug": "barbara",
+    "name": "Barbara",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "element": "HYDRO",
+    "name_zh": "芭芭拉"
+  },
+  {
+    "slug": "beidou",
+    "name": "Beidou",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "element": "ELECTRO",
+    "name_zh": "北斗"
+  },
+  {
+    "slug": "bennett",
+    "name": "Bennett",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "element": "PYRO",
+    "name_zh": "班尼特"
+  },
+  {
+    "slug": "black-tassel",
+    "name": "Black Tassel",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "POLEARM",
+    "release_date": "2020-09-28",
+    "name_zh": "黑缨枪"
+  },
+  {
+    "slug": "bloodtainted-greatsword",
+    "name": "Bloodtainted Greatsword",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "name_zh": "沐浴龙血的剑"
+  },
+  {
+    "slug": "candace",
+    "name": "Candace",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2022-09-28",
+    "element": "HYDRO",
+    "name_zh": "坎蒂丝"
+  },
+  {
+    "slug": "charlotte",
+    "name": "Charlotte",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2023-11-08",
+    "element": "CRYO",
+    "name_zh": "夏洛蒂"
+  },
+  {
+    "slug": "chevreuse",
+    "name": "Chevreuse",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2024-01-09",
+    "element": "PYRO",
+    "name_zh": "夏沃蕾"
+  },
+  {
+    "slug": "chongyun",
+    "name": "Chongyun",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "element": "CRYO",
+    "name_zh": "重云"
+  },
+  {
+    "slug": "collei",
+    "name": "Collei",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2022-08-24",
+    "element": "DENDRO",
+    "name_zh": "柯莱"
+  },
+  {
+    "slug": "cool-steel",
+    "name": "Cool Steel",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "name_zh": "冷刃"
+  },
+  {
+    "slug": "debate-club",
+    "name": "Debate Club",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "name_zh": "以理服人"
+  },
+  {
+    "slug": "dehya",
+    "name": "Dehya",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2023-03-01",
+    "element": "PYRO",
+    "name_zh": "迪希雅"
+  },
+  {
+    "slug": "diluc",
+    "name": "Diluc",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "element": "PYRO",
+    "name_zh": "迪卢克"
+  },
+  {
+    "slug": "diona",
+    "name": "Diona",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2020-11-11",
+    "element": "CRYO",
+    "name_zh": "迪奥娜"
+  },
+  {
+    "slug": "dori",
+    "name": "Dori",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2022-09-09",
+    "element": "ELECTRO",
+    "name_zh": "多莉"
+  },
+  {
+    "slug": "dragons-bane",
+    "name": "Dragon's Bane",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2020-09-28",
+    "name_zh": "匣里灭辰"
+  },
+  {
+    "slug": "emerald-orb",
+    "name": "Emerald Orb",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "name_zh": "翡玉法球"
+  },
+  {
+    "slug": "eye-of-perception",
+    "name": "Eye of Perception",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "name_zh": "昭心"
+  },
+  {
+    "slug": "faruzan",
+    "name": "Faruzan",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2022-12-07",
+    "element": "ANEMO",
+    "name_zh": "珐露珊"
+  },
+  {
+    "slug": "favonius-codex",
+    "name": "Favonius Codex",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "name_zh": "西风秘典"
+  },
+  {
+    "slug": "favonius-greatsword",
+    "name": "Favonius Greatsword",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "name_zh": "西风大剑"
+  },
+  {
+    "slug": "favonius-lance",
+    "name": "Favonius Lance",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2020-09-28",
+    "name_zh": "西风长枪"
+  },
+  {
+    "slug": "favonius-sword",
+    "name": "Favonius Sword",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "name_zh": "西风剑"
+  },
+  {
+    "slug": "favonius-warbow",
+    "name": "Favonius Warbow",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "name_zh": "西风猎弓"
+  },
+  {
+    "slug": "ferrous-shadow",
+    "name": "Ferrous Shadow",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "name_zh": "铁影阔剑"
+  },
+  {
+    "slug": "fischl",
+    "name": "Fischl",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "element": "ELECTRO",
+    "name_zh": "菲谢尔"
+  },
+  {
+    "slug": "freminet",
+    "name": "Freminet",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2023-09-05",
+    "element": "CRYO",
+    "name_zh": "菲米尼"
+  },
+  {
+    "slug": "furina",
+    "name": "Furina",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "SWORD",
+    "release_date": "2023-11-08",
+    "element": "HYDRO",
+    "name_zh": "芙宁娜"
+  },
+  {
+    "slug": "gaming",
+    "name": "Gaming",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2024-01-31",
+    "element": "PYRO",
+    "name_zh": "嘉明"
+  },
+  {
+    "slug": "gorou",
+    "name": "Gorou",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2021-12-14",
+    "element": "GEO",
+    "name_zh": "五郎"
+  },
+  {
+    "slug": "harbinger-of-dawn",
+    "name": "Harbinger of Dawn",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "name_zh": "黎明神剑"
+  },
+  {
+    "slug": "jean",
+    "name": "Jean",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "element": "ANEMO",
+    "name_zh": "琴"
+  },
+  {
+    "slug": "kachina",
+    "name": "Kachina",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2024-08-28",
+    "element": "GEO",
+    "name_zh": "卡齐娜"
+  },
+  {
+    "slug": "kaveh",
+    "name": "Kaveh",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2023-05-02",
+    "element": "DENDRO",
+    "name_zh": "卡维"
+  },
+  {
+    "slug": "keqing",
+    "name": "Keqing",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "element": "ELECTRO",
+    "name_zh": "刻晴"
+  },
+  {
+    "slug": "kirara",
+    "name": "Kirara",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2023-05-24",
+    "element": "DENDRO",
+    "name_zh": "绮良良"
+  },
+  {
+    "slug": "kujou-sara",
+    "name": "Kujou Sara",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2021-09-01",
+    "element": "ELECTRO",
+    "name_zh": "九条裟罗"
+  },
+  {
+    "slug": "kuki-shinobu",
+    "name": "Kuki Shinobu",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2022-06-21",
+    "element": "ELECTRO",
+    "name_zh": "久岐忍"
+  },
+  {
+    "slug": "layla",
+    "name": "Layla",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2022-11-18",
+    "element": "CRYO",
+    "name_zh": "莱依拉"
+  },
+  {
+    "slug": "lions-roar",
+    "name": "Lion's Roar",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "name_zh": "匣里龙吟"
+  },
+  {
+    "slug": "lynette",
+    "name": "Lynette",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2023-08-16",
+    "element": "ANEMO",
+    "name_zh": "琳妮特"
+  },
+  {
+    "slug": "magic-guide",
+    "name": "Magic Guide",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "name_zh": "魔导绪论"
+  },
+  {
+    "slug": "mavuika",
+    "name": "Mavuika",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2025-01-01",
+    "element": "PYRO",
+    "name_zh": "玛薇卡"
+  },
+  {
+    "slug": "mika",
+    "name": "Mika",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2023-03-21",
+    "element": "CRYO",
+    "name_zh": "米卡"
+  },
+  {
+    "slug": "mona",
+    "name": "Mona",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "element": "HYDRO",
+    "name_zh": "莫娜"
+  },
+  {
+    "slug": "nahida",
+    "name": "Nahida",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "CATALYST",
+    "release_date": "2022-11-02",
+    "element": "DENDRO",
+    "name_zh": "纳西妲"
+  },
+  {
+    "slug": "ningguang",
+    "name": "Ningguang",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "element": "GEO",
+    "name_zh": "凝光"
+  },
+  {
+    "slug": "noelle",
+    "name": "Noelle",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "element": "GEO",
+    "name_zh": "诺艾尔"
+  },
+  {
+    "slug": "ororon",
+    "name": "Ororon",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2024-11-20",
+    "element": "ELECTRO",
+    "name_zh": "欧洛伦"
+  },
+  {
+    "slug": "qiqi",
+    "name": "Qiqi",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "element": "CRYO",
+    "name_zh": "七七"
+  },
+  {
+    "slug": "raiden-shogun",
+    "name": "Raiden Shogun",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "POLEARM",
+    "release_date": "2021-09-01",
+    "element": "ELECTRO",
+    "name_zh": "雷电将军"
+  },
+  {
+    "slug": "rainslasher",
+    "name": "Rainslasher",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "name_zh": "雨裁"
+  },
+  {
+    "slug": "raven-bow",
+    "name": "Raven Bow",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "name_zh": "鸦羽弓"
+  },
+  {
+    "slug": "razor",
+    "name": "Razor",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "element": "ELECTRO",
+    "name_zh": "雷泽"
+  },
+  {
+    "slug": "rosaria",
+    "name": "Rosaria",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2021-04-06",
+    "element": "CRYO",
+    "name_zh": "罗莎莉亚"
+  },
+  {
+    "slug": "rust",
+    "name": "Rust",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "name_zh": "弓藏"
+  },
+  {
+    "slug": "sacrificial-bow",
+    "name": "Sacrificial Bow",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "name_zh": "祭礼弓"
+  },
+  {
+    "slug": "sacrificial-fragments",
+    "name": "Sacrificial Fragments",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "name_zh": "祭礼残章"
+  },
+  {
+    "slug": "sacrificial-greatsword",
+    "name": "Sacrificial Greatsword",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "name_zh": "祭礼大剑"
+  },
+  {
+    "slug": "sacrificial-sword",
+    "name": "Sacrificial Sword",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "name_zh": "祭礼剑"
+  },
+  {
+    "slug": "sayu",
+    "name": "Sayu",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2021-08-10",
+    "element": "ANEMO",
+    "name_zh": "早柚"
+  },
+  {
+    "slug": "sethos",
+    "name": "Sethos",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2024-06-05",
+    "element": "ELECTRO",
+    "name_zh": "赛索斯"
+  },
+  {
+    "slug": "sharpshooters-oath",
+    "name": "Sharpshooter's Oath",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "name_zh": "神射手之誓"
+  },
+  {
+    "slug": "shikanoin-heizou",
+    "name": "Shikanoin Heizou",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2022-07-13",
+    "element": "ANEMO",
+    "name_zh": "鹿野院平藏"
+  },
+  {
+    "slug": "skyrider-sword",
+    "name": "Skyrider Sword",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "name_zh": "飞天御剑"
+  },
+  {
+    "slug": "slingshot",
+    "name": "Slingshot",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "name_zh": "弹弓"
+  },
+  {
+    "slug": "sucrose",
+    "name": "Sucrose",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "element": "ANEMO",
+    "name_zh": "砂糖"
+  },
+  {
+    "slug": "the-bell",
+    "name": "The Bell",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-09-28",
+    "name_zh": "钟剑"
+  },
+  {
+    "slug": "the-flute",
+    "name": "The Flute",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "name_zh": "笛剑"
+  },
+  {
+    "slug": "the-stringless",
+    "name": "The Stringless",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "name_zh": "绝弦"
+  },
+  {
+    "slug": "the-widsith",
+    "name": "The Widsith",
+    "item_type": "WEAPON",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "name_zh": "流浪乐章"
+  },
+  {
+    "slug": "thoma",
+    "name": "Thoma",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2021-11-02",
+    "element": "PYRO",
+    "name_zh": "托马"
+  },
+  {
+    "slug": "thrilling-tales-of-dragon-slayers",
+    "name": "Thrilling Tales of Dragon Slayers",
+    "item_type": "WEAPON",
+    "rarity": 3,
+    "weapon_type": "CATALYST",
+    "release_date": "2020-09-28",
+    "name_zh": "讨龙英杰谭"
+  },
+  {
+    "slug": "tighnari",
+    "name": "Tighnari",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "BOW",
+    "release_date": "2022-08-24",
+    "element": "DENDRO",
+    "name_zh": "提纳里"
+  },
+  {
+    "slug": "venti",
+    "name": "Venti",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "BOW",
+    "release_date": "2020-09-28",
+    "element": "ANEMO",
+    "name_zh": "温迪"
+  },
+  {
+    "slug": "xiangling",
+    "name": "Xiangling",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2020-09-28",
+    "element": "PYRO",
+    "name_zh": "香菱"
+  },
+  {
+    "slug": "xingqiu",
+    "name": "Xingqiu",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "SWORD",
+    "release_date": "2020-09-28",
+    "element": "HYDRO",
+    "name_zh": "行秋"
+  },
+  {
+    "slug": "xinyan",
+    "name": "Xinyan",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CLAYMORE",
+    "release_date": "2020-12-01",
+    "element": "PYRO",
+    "name_zh": "辛焱"
+  },
+  {
+    "slug": "yanfei",
+    "name": "Yanfei",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "CATALYST",
+    "release_date": "2021-04-28",
+    "element": "PYRO",
+    "name_zh": "烟绯"
+  },
+  {
+    "slug": "yaoyao",
+    "name": "Yaoyao",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2023-01-18",
+    "element": "DENDRO",
+    "name_zh": "瑶瑶"
+  },
+  {
+    "slug": "yun-jin",
+    "name": "Yun Jin",
+    "item_type": "CHARACTER",
+    "rarity": 4,
+    "weapon_type": "POLEARM",
+    "release_date": "2022-01-05",
+    "element": "GEO",
+    "name_zh": "云堇"
+  },
+  {
+    "slug": "zhongli",
+    "name": "Zhongli",
+    "item_type": "CHARACTER",
+    "rarity": 5,
+    "weapon_type": "POLEARM",
+    "release_date": "2020-12-01",
+    "element": "GEO",
+    "name_zh": "钟离"
+  }
+]
