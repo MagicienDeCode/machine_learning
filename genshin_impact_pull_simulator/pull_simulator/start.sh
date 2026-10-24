@@ -40,4 +40,4 @@ fi
 
 echo
 echo "API on http://localhost:$PORT (docs: /docs). Login traveler@test.local / 123456."
-exec .venv/bin/uvicorn app.main:app --reload --port "$PORT"
+exec .venv/bin/uvicorn app.main:app --reload --port "$PORT" --host 0.0.0.0
