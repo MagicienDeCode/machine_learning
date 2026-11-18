@@ -1,0 +1,9 @@
+__pycache__
+*.pyc
+.DS_Store
+.claude
+logs
+example.jpg
+trained_models_cnn_mps/backup
+trained_models_cnn_mps/training_log.txt
+trained_models_cnn_mps/image.png
